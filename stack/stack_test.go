@@ -27,6 +27,8 @@ var _ = Describe("Stack", func() {
 			It("has size 1", func() {
 				stack.Push(1)
 				Expect(stack.Size()).To(Equal(1))
+				tail, _ := stack.Peek()
+				Expect(tail).To(Equal(1))
 			})
 		})
 
@@ -38,6 +40,8 @@ var _ = Describe("Stack", func() {
 			It("has size 1", func() {
 				stack.Push(2)
 				Expect(stack.Size()).To(Equal(2))
+				tail, _ := stack.Peek()
+				Expect(tail).To(Equal(2))
 			})
 		})
 
@@ -50,6 +54,44 @@ var _ = Describe("Stack", func() {
 			It("has size 2", func() {
 				stack.Push(3)
 				Expect(stack.Size()).To(Equal(3))
+				tail, _ := stack.Peek()
+				Expect(tail).To(Equal(3))
+			})
+		})
+	})
+
+	Describe("Peek tests", func() {
+		When("stack is empty", func() {
+			It("should throw an error", func() {
+				head, err := stack.Peek()
+				Expect(err).To(HaveOccurred())
+				Expect(head).To(Equal(0))
+			})
+		})
+
+		When("stack only has on element", func() {
+			BeforeEach(func() {
+				stack.Push(1)
+			})
+
+			It("returns that value and does not throw an error", func() {
+				tail, err := stack.Peek()
+				Expect(err).ToNot(HaveOccurred())
+				Expect(tail).To(Equal(1))
+			})
+		})
+
+		When("stack has multiple elements", func() {
+			BeforeEach(func() {
+				stack.Push(1)
+				stack.Push(2)
+				stack.Push(3)
+			})
+
+			It("returns the last element in the stack and does not throw an error", func() {
+				tail, err := stack.Peek()
+				Expect(err).ToNot(HaveOccurred())
+				Expect(tail).To(Equal(3))
 			})
 		})
 	})

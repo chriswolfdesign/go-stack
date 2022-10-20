@@ -1,5 +1,7 @@
 package stack
 
+import "fmt"
+
 type Stack struct {
 	size int
 	head *stackNode
@@ -22,6 +24,14 @@ func (s *Stack) Push(element int) {
 	}
 
 	s.size++
+}
+
+func (s *Stack) Peek() (int, error) {
+	if s.size == 0 {
+		return 0, fmt.Errorf("Not implemented")
+	}
+
+	return s.tail.val, nil
 }
 
 type stackNode struct {
