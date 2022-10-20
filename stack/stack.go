@@ -28,10 +28,29 @@ func (s *Stack) Push(element int) {
 
 func (s *Stack) Peek() (int, error) {
 	if s.size == 0 {
-		return 0, fmt.Errorf("Not implemented")
+		return 0, fmt.Errorf("cannot peek into empty stack")
 	}
 
 	return s.tail.val, nil
+}
+
+func (s *Stack) Pop() (int, error) {
+	if s.size == 0 {
+		return 0, fmt.Errorf("cannot pop from empty stack")
+	}
+
+	val := s.tail.val
+
+	if s.size == 1 {
+		s.head = nil
+		s.tail = nil
+	} else {
+		s.tail = s.tail.prev
+		s.tail.next = nil
+	}
+
+	s.size--
+	return val, nil
 }
 
 type stackNode struct {

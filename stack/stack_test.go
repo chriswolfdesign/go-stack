@@ -95,4 +95,45 @@ var _ = Describe("Stack", func() {
 			})
 		})
 	})
+
+	Describe("Pop tests", func() {
+		When("popping from empty stack", func() {
+			It("throws an error", func() {
+				element, err := stack.Pop()
+				Expect(err).To(HaveOccurred())
+				Expect(element).To(Equal(0))
+			})
+		})
+
+		When("popping from stack with one element", func() {
+			BeforeEach(func() {
+				stack.Push(1)
+			})
+
+			It("removes that element and does not throw an error", func() {
+				element, err := stack.Pop()
+				Expect(err).ToNot(HaveOccurred())
+				Expect(element).To(Equal(1))
+				tail, err := stack.Peek()
+				Expect(err).To(HaveOccurred())
+				Expect(tail).To(Equal(0))
+			})
+		})
+
+		When("popping from stack with multiple elements", func() {
+			BeforeEach(func() {
+				stack.Push(1)
+				stack.Push(2)
+				stack.Push(3)
+			})
+			It("removes last element and does not throw error", func() {
+				element, err := stack.Pop()
+				Expect(err).ToNot(HaveOccurred())
+				Expect(element).To(Equal(3))
+				tail, err := stack.Peek()
+				Expect(err).ToNot(HaveOccurred())
+				Expect(tail).To(Equal(2))
+			})
+		})
+	})
 })
