@@ -6,9 +6,9 @@ import (
 )
 
 var _ = Describe("GoStack", func() {
-	When("should fail", func() {
-		It("fails", func() {
-			Expect(false).To(BeTrue())
+	When("should pass", func() {
+		It("passes", func() {
+			Expect(true).To(BeTrue())
 		})
 	})
 })
